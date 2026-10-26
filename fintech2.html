@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>€20 — RWA • FRS • DeFi</title>
+    <link rel="icon" href="euro20_logo.png" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #0A0E27; color: #E0E6FF;
+            line-height: 1.6; padding-top: 80px; padding-bottom: 60px;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(10,14,39,0.92); backdrop-filter: blur(12px);
+            z-index: 100; border-bottom: 1px solid rgba(0,51,153,0.2);
+            padding: 10px 0;
+        }
+        .header-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 10px;
+        }
+        .logo { display: flex; align-items: center; gap: 8px; }
+        .logo img { height: 36px; width: auto; border-radius: 50%; }
+        .logo-text { font-size: 20px; font-weight: 700; color: #fff; }
+        nav { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+        nav a { color: #8A94C8; text-decoration: none; font-size: 12px; font-weight: 500; transition: 0.3s; }
+        nav a:hover { color: #4A8CFF; }
+        nav a.active { color: #4A8CFF; border-bottom: 2px solid #4A8CFF; }
+        .btn-primary {
+            background: #003399; color: #fff; padding: 6px 18px;
+            border-radius: 30px; font-weight: 700; text-decoration: none;
+            transition: 0.3s; display: inline-block; font-size: 13px;
+        }
+        .btn-primary:hover { background: #002280; transform: scale(1.02); }
+        .btn-secondary {
+            background: transparent; color: #4A8CFF; padding: 6px 18px;
+            border-radius: 30px; font-weight: 600; text-decoration: none;
+            border: 1px solid #4A8CFF; transition: 0.3s; display: inline-block;
+            font-size: 13px;
+        }
+        .btn-secondary:hover { background: #4A8CFF; color: #0A0E27; }
+        section { padding: 30px 0; }
+        .section-header { text-align: center; margin-bottom: 30px; }
+        .section-tag {
+            display: inline-block; background: rgba(0,51,153,0.12);
+            color: #4A8CFF; padding: 4px 16px; border-radius: 20px;
+            font-size: 12px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .section-header h1 { font-size: 34px; font-weight: 700; margin: 8px 0; }
+        .section-header h1 .highlight { color: #4A8CFF; }
+        .section-header p { color: #8A94C8; max-width: 600px; margin: 0 auto; }
+        .rwa-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px; margin-bottom: 24px;
+        }
+        .rwa-card {
+            background: rgba(26,30,65,0.4); border: 1px solid #1E2350;
+            border-radius: 16px; padding: 24px 22px; transition: 0.3s;
+        }
+        .rwa-card:hover { border-color: #4A8CFF; transform: translateY(-4px); }
+        .rwa-card .rwa-icon { font-size: 38px; margin-bottom: 10px; }
+        .rwa-card h3 { color: #fff; font-size: 19px; margin-bottom: 6px; }
+        .rwa-card p { color: #8A94C8; font-size: 14px; }
+        .feature-badge {
+            display: inline-block; background: rgba(0,51,153,0.15);
+            color: #4A8CFF; padding: 2px 12px; border-radius: 20px;
+            font-size: 11px; font-weight: 600; text-transform: uppercase;
+            margin-top: 8px; margin-right: 4px;
+        }
+        .image-block { max-width: 900px; margin: 30px auto; text-align: center; }
+        .image-block img {
+            max-width: 100%; border-radius: 20px;
+            border: 1px solid #1E2350;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .contract-box {
+            background: rgba(0,51,153,0.05); border: 1px solid rgba(0,51,153,0.15);
+            border-radius: 12px; padding: 14px 16px; margin: 20px 0;
+            text-align: center; font-size: 13px; color: #8A94C8; font-family: 'Courier New', monospace;
+        }
+        .contract-box .addr { color: #FFD700; }
+        .contract-box .copy-btn { background: transparent; border: none; color: #5A649A; cursor: pointer; font-size: 13px; font-family: 'Segoe UI', sans-serif; }
+        .contract-box .copy-btn:hover { color: #FFD700; }
+        .contract-box .solscan-link { color: #5A649A; text-decoration: none; font-size: 13px; font-family: 'Segoe UI', sans-serif; margin-left: 8px; }
+        .contract-box .solscan-link:hover { color: #fff; }
+        .counter-box {
+            text-align: center; padding: 16px;
+            background: rgba(0,51,153,0.05); border-radius: 12px;
+            margin: 20px 0; font-size: 14px; color: #8A94C8;
+            font-family: 'Courier New', monospace;
+        }
+        .counter-box .counter-visitors { color: #4A8CFF; font-weight: 600; }
+        .counter-box .counter-holders { color: #2ECC40; font-weight: 600; }
+        .counter-box .counter-clients { color: #FFD700; font-weight: 600; }
+        .back-link { display: inline-block; margin-top: 16px; color: #4A8CFF; text-decoration: none; font-weight: 500; }
+        .back-link:hover { text-decoration: underline; }
+        footer {
+            background: #060920; padding: 20px 0 16px; text-align: center;
+            border-top: 1px solid #1E2350; margin-top: 20px;
+        }
+        footer p { color: #3A406A; font-size: 13px; }
+        @media (max-width: 768px) {
+            .header-inner { flex-direction: column; align-items: stretch; }
+            nav { justify-content: center; gap: 6px; }
+            nav a { font-size: 10px; }
+            .section-header h1 { font-size: 26px; }
+            .contract-box { font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-inner">
+        <div class="logo">
+            <img src="euro20_logo.png" alt="€20" />
+            <span class="logo-text">€20</span>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="fintech1.html">Use Cases</a>
+            <a href="fintech2.html" class="active">RWA • FRS</a>
+            <a href="trade.html">Trade</a>
+            <a href="ecosystem.html">Ecosystem</a>
+            <a href="https://123tokens.github.io/one/">$ONE</a>
+            <a href="https://123tokens.github.io/two/">€TWO</a>
+            <a href="https://123tokens.github.io/three/">£THREE</a>
+            <a href="https://123tokens.github.io/five/">¥FIVE</a>
+            <a href="https://123tokens.github.io/ghina/">$777</a>
+            <a href="https://123tokens.github.io/365/">¥365</a>
+        </nav>
+        <a href="buy.html" class="btn-primary">Buy €20</a>
+    </div>
+</header>
+
+<section>
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">RWA • FRS • DeFi</span>
+            <h1>Powerful <span class="highlight">Fintech Infrastructure</span></h1>
+            <p>€20 is the gateway to institutional-grade DeFi, RWA tokenization, and European payment rails.</p>
+        </div>
+
+        <div class="image-block">
+            <img src="euro20_rwa_diagram.png" alt="€20 RWA Diagram" />
+        </div>
+
+        <div class="rwa-grid">
+            <div class="rwa-card">
+                <div class="rwa-icon">🏢</div>
+                <h3>RWA Tokenization</h3>
+                <p>Tokenize real estate, commodities, IP, and more. €20 serves as the settlement layer for real-world assets in Europe.</p>
+                <span class="feature-badge">Real Estate</span>
+                <span class="feature-badge">Commodities</span>
+                <span class="feature-badge">IP</span>
+            </div>
+
+            <div class="rwa-card">
+                <div class="rwa-icon">📈</div>
+                <h3>FRS Framework</h3>
+                <p>Real-time pricing, risk assessment, and cross-asset correlation for €20 and the whole ecosystem.</p>
+                <span class="feature-badge">Pricing</span>
+                <span class="feature-badge">Risk</span>
+            </div>
+
+            <div class="rwa-card">
+                <div class="rwa-icon">🔄</div>
+                <h3>DeFi Integration</h3>
+                <p>Lending, borrowing, yield farming, and liquidity provisioning with €20 on Meteora and Jupiter.</p>
+                <span class="feature-badge">Lending</span>
+                <span class="feature-badge">Yield</span>
+            </div>
+
+            <div class="rwa-card">
+                <div class="rwa-icon">💳</div>
+                <h3>SEPA & Payment Rails</h3>
+                <p>SEPA, SWIFT, POS, GPI, VISA, MASTERCARD — €20 connects the European financial rails.</p>
+                <span class="feature-badge">SEPA</span>
+                <span class="feature-badge">SWIFT</span>
+                <span class="feature-badge">VISA</span>
+            </div>
+
+            <div class="rwa-card">
+                <div class="rwa-icon">🌍</div>
+                <h3>Multi-Currency Settlement</h3>
+                <p>$ONE, €TWO, £THREE, ¥FIVE, $777, ¥365, and €20 — a complete global currency basket.</p>
+                <span class="feature-badge">USD</span>
+                <span class="feature-badge">EUR</span>
+                <span class="feature-badge">GBP</span>
+                <span class="feature-badge">CNY</span>
+            </div>
+
+            <div class="rwa-card">
+                <div class="rwa-icon">🛡️</div>
+                <h3>Token-2022 Compliance</h3>
+                <p>Audit-ready, transparent reserves, and on-chain proof of assets. Built for global compliance using Token-2022 hooks.</p>
+                <span class="feature-badge">Audited</span>
+                <span class="feature-badge">Token-2022</span>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 16px;">
+            <a href="fintech1.html" class="btn-secondary">← Back to Use Cases</a>
+        </div>
+
+        <div class="counter-box">
+            👥 <span class="counter-visitors">20,000</span> visitors
+            &nbsp;·&nbsp;
+            💎 <span class="counter-holders">0</span> holders
+            &nbsp;·&nbsp;
+            🤝 <span class="counter-clients">0</span> clients
+        </div>
+
+        <div class="contract-box">
+            📜 Contract: <span class="addr">EVr3k6rruveLtQiLadvNiKhK8e4WecnLHZxhcJwRDuTg</span>
+            <button onclick="navigator.clipboard.writeText('EVr3k6rruveLtQiLadvNiKhK8e4WecnLHZxhcJwRDuTg')" class="copy-btn">📋 Copy</button>
+            <a href="https://solscan.io/token/EVr3k6rruveLtQiLadvNiKhK8e4WecnLHZxhcJwRDuTg" target="_blank" class="solscan-link">🔍 Solscan</a>
+        </div>
+
+        <a href="index.html" class="back-link">← Back to €20 Home</a>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>© 2026 One•Two•Three. Built on Solana. | Contract: EVr3k6rruveLtQiLadvNiKhK8e4WecnLHZxhcJwRDuTg</p>
+    </div>
+</footer>
+
+<script src="counter.js"></script>
+
+</body>
+</html>
