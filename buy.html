@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>€20 — Buy with Card, SEPA, SWIFT</title>
+    <link rel="icon" href="euro20_logo.png" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #0A0E27; color: #E0E6FF;
+            line-height: 1.6; padding-top: 80px; padding-bottom: 60px;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .glass-card {
+            background: rgba(26, 30, 65, 0.6); backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.05); border-radius: 24px;
+            padding: 40px; margin-bottom: 24px;
+        }
+        .glass-card h1 { font-size: 32px; margin-bottom: 8px; }
+        .glass-card h1 .highlight { color: #4A8CFF; }
+        .glass-card .sub { color: #8A94C8; margin-bottom: 24px; }
+        .method-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+        .method-card {
+            background: rgba(26,30,65,0.3); border: 1px solid #1E2350;
+            border-radius: 16px; padding: 20px 16px; text-align: center;
+            transition: 0.3s; text-decoration: none; color: #E0E6FF;
+        }
+        .method-card:hover { border-color: #4A8CFF; transform: translateY(-4px); }
+        .method-card .icon { font-size: 32px; display: block; margin-bottom: 8px; }
+        .method-card .name { font-weight: 600; }
+        .method-card .desc { font-size: 13px; color: #5A649A; }
+        .contract-box {
+            background: rgba(0,51,153,0.05); border: 1px solid rgba(0,51,153,0.15);
+            border-radius: 12px; padding: 16px; margin: 20px 0;
+            text-align: center; font-size: 13px; color: #8A94C8;
+            font-family: 'Courier New', monospace;
+        }
+        .contract-box .addr { color: #FFD700; }
+        .contract-box .copy-btn { background: transparent; border: none; color: #5A649A; cursor: pointer; font-size: 13px; font-family: 'Segoe UI', sans-serif; }
+        .contract-box .copy-btn:hover { color: #FFD700; }
+        .contract-box .solscan-link { color: #5A649A; text-decoration: none; font-size: 13px; font-family: 'Segoe UI', sans-serif; margin-left: 8px; }
+        .contract-box .solscan-link:hover { color: #fff; }
+        .video-tutorial {
+            max-width: 700px; margin: 24px auto;
+            border-radius: 16px; overflow: hidden;
+            border: 2px solid rgba(0,51,153,0.3);
+            box-shadow: 0 10px 40px rgba(0,51,153,0.15);
+        }
+        .video-tutorial video { width: 100%; display: block; }
+        .back-link { display: inline-block; margin-top: 20px; color: #4A8CFF; text-decoration: none; font-weight: 500; }
+        .back-link:hover { text-decoration: underline; }
+        .logo-img { height: 60px; width: auto; margin-bottom: 20px; border-radius: 50%; }
+        .counter-box {
+            text-align: center; padding: 16px;
+            background: rgba(0,51,153,0.05); border-radius: 12px;
+            margin: 20px 0; font-size: 14px; color: #8A94C8;
+            font-family: 'Courier New', monospace;
+        }
+        .counter-box .counter-visitors { color: #4A8CFF; font-weight: 600; }
+        .counter-box .counter-holders { color: #2ECC40; font-weight: 600; }
+        .counter-box .counter-clients { color: #FFD700; font-weight: 600; }
+        @media (max-width: 700px) { .method-grid { grid-template-columns: 1fr 1fr; } .glass-card { padding: 24px; } }
+        @media (max-width: 450px) { .method-grid { grid-template-columns: 1fr; } .contract-box { font-size: 11px; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="glass-card">
+        <img src="euro20_logo.png" alt="€20" class="logo-img" />
+        <h1>Buy <span class="highlight">€20</span></h1>
+        <p class="sub">Choose your preferred payment method</p>
+
+        <div class="video-tutorial">
+            <video controls playsinline poster="euro20_logo.png">
+                <source src="euro20_how_to_buy.mp4" type="video/mp4">
+                Your browser does not support video.
+            </video>
+        </div>
+
+        <div class="method-grid">
+            <a href="https://app.uniswap.org/explore/tokens/solana/EVr3k6rruveLtQiLadvNiKhK8e4WecnLHZxhcJwRDuTg" target="_blank" class="method-card">
+                <span class="icon">🦄</span>
+                <span class="name">Uniswap (Wormhole)</span>
+                <span class="desc">Cross-chain purchase</span>
+            </a>
+            <a href="https://opensea.io/token/solana/EVr3k6rruveLtQiLadvNiKhK8e4WecnLHZxhcJwRDuTg" target="_blank" class="method-card">
+                <span class="icon">🖼️</span>
+                <span class="name">OpenSea</span>
+                <span class="desc">Buy with card</span>
+            </a>
+            <a href="https://jup.ag/swap/SOL-EVr3k6rruveLtQiLadvNiKhK8e4WecnLHZxhcJwRDuTg" target="_blank" class="method-card">
+                <span class="icon">🔄</span>
+                <span class="name">Jupiter Swap</span>
+                <span class="desc">Any crypto → €20</span>
+            </a>
+            <a href="https://www.binance.com/" target="_blank" class="method-card">
+                <span class="icon">🇪🇺</span>
+                <span class="name">SEPA</span>
+                <span class="desc">EU bank transfer • Binance</span>
+            </a>
+            <a href="https://www.kraken.com/" target="_blank" class="method-card">
+                <span class="icon">🏦</span>
+                <span class="name">SWIFT</span>
+                <span class="desc">International wire • Kraken</span>
+            </a>
+            <a href="https://www.binance.com/en/convert" target="_blank" class="method-card">
+                <span class="icon">💱</span>
+                <span class="name">POS / Convert</span>
+                <span class="desc">Fiat → €20</span>
+            </a>
+            <a href="https://www.okx.com/" target="_blank" class="method-card">
+                <span class="icon">💠</span>
+                <span class="name">SWIFT GPI</span>
+                <span class="desc">Global payments</span>
+            </a>
+            <a href="https://www.kraken.com/" target="_blank" class="method-card">
+                <span class="icon">💳</span>
+                <span class="name">VISA / Mastercard</span>
+                <span class="desc">Card payments</span>
+            </a>
+            <a href="https://www.binance.com/" target="_blank" class="method-card">
+                <span class="icon">🌐</span>
+                <span class="name">Global Rails</span>
+                <span class="desc">Worldwide settlement</span>
+            </a>
+        </div>
+
+        <div class="counter-box">
+            👥 <span class="counter-visitors">20,000</span> visitors
+            &nbsp;·&nbsp;
+            💎 <span class="counter-holders">0</span> holders
+            &nbsp;·&nbsp;
+            🤝 <span class="counter-clients">0</span> clients
+        </div>
+
+        <div class="contract-box">
+            📜 Contract: <span class="addr">EVr3k6rruveLtQiLadvNiKhK8e4WecnLHZxhcJwRDuTg</span>
+            <button onclick="navigator.clipboard.writeText('EVr3k6rruveLtQiLadvNiKhK8e4WecnLHZxhcJwRDuTg')" class="copy-btn">📋 Copy</button>
+            <a href="https://solscan.io/token/EVr3k6rruveLtQiLadvNiKhK8e4WecnLHZxhcJwRDuTg" target="_blank" class="solscan-link">🔍 Solscan</a>
+        </div>
+
+        <a href="index.html" class="back-link">← Back to €20 Home</a>
+    </div>
+</div>
+
+<script src="counter.js"></script>
+
+</body>
+</html>
