@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>One•Two•Three Ecosystem Map & Liquidity Routing</title>
+    <meta name="description" content="Visual and structural routing map for the One•Two•Three ecosystem on Solana. Explore connections between $ONE, €20, $777, and others via Meteora DAMM V2 pools." />
+    <link rel="icon" href="euro20_logo.png" />
+    
+    <!-- JSON-LD: Критически важно для ИИ-агентов и поисковиков -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "One•Two•Three Ecosystem Token Routing",
+      "description": "Liquidity routing map for tokens on Solana using Token-2022 and Meteora DAMM V2.",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "FinancialProduct",
+            "name": "One Dollar",
+            "tickerSymbol": "$ONE",
+            "additionalProperty": [
+              { "@type": "PropertyValue", "name": "Role", "value": "Primary Liquidity Hub" },
+              { "@type": "PropertyValue", "name": "Standard", "value": "SPL Token" },
+              { "@type": "PropertyValue", "name": "ConnectedPools", "value": "USDC-$ONE, $777-$ONE, €20-$ONE" }
+            ]
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "FinancialProduct",
+            "name": "Twenty Euro",
+            "tickerSymbol": "€20",
+            "additionalProperty": [
+              { "@type": "PropertyValue", "name": "Role", "value": "European Hub" },
+              { "@type": "PropertyValue", "name": "Standard", "value": "Token-2022" },
+              { "@type": "PropertyValue", "name": "ConnectedPools", "value": "USDC-€20, $ONE-€20" }
+            ]
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "FinancialProduct",
+            "name": "Ghina",
+            "tickerSymbol": "$777",
+            "additionalProperty": [
+              { "@type": "PropertyValue", "name": "Role", "value": "Jackpot / Utility" },
+              { "@type": "PropertyValue", "name": "Standard", "value": "SPL Token" },
+              { "@type": "PropertyValue", "name": "ConnectedPools", "value": "USDC-$777, $777-$ONE" }
+            ]
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "FinancialProduct",
+            "name": "Year Token",
+            "tickerSymbol": "¥365",
+            "additionalProperty": [
+              { "@type": "PropertyValue", "name": "Role", "value": "Yearly Cycle" },
+              { "@type": "PropertyValue", "name": "Standard", "value": "SPL Token" },
+              { "@type": "PropertyValue", "name": "ConnectedPools", "value": "USDC-¥365" }
+            ]
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "FinancialProduct",
+            "name": "Taxi Hub",
+            "tickerSymbol": "$TAXI",
+            "additionalProperty": [
+              { "@type": "PropertyValue", "name": "Role", "value": "Secondary Routing Hub" },
+              { "@type": "PropertyValue", "name": "Standard", "value": "SPL Token" },
+              { "@type": "PropertyValue", "name": "ConnectedPools", "value": "SOL-$TAXI, $ONE-$TAXI" }
+            ]
+          }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #0A0E27; color: #E0E6FF;
+            line-height: 1.6; padding-top: 80px; padding-bottom: 60px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(10, 14, 39, 0.92); backdrop-filter: blur(12px);
+            z-index: 100; border-bottom: 1px solid #1E2350;
+            padding: 10px 0;
+        }
+        .header-inner {
+            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+        }
+        .logo { display: flex; align-items: center; gap: 8px; }
+        .logo-text { font-size: 20px; font-weight: 700; color: #fff; }
+        .logo img { height: 36px; width: auto; border-radius: 50%; }
+        nav { display: flex; gap: 15px; flex-wrap: wrap; align-items: center; }
+        nav a { color: #8A94C8; text-decoration: none; font-size: 14px; font-weight: 500; transition: 0.3s; }
+        nav a:hover { color: #4A8CFF; }
+        nav a.active { color: #4A8CFF; border-bottom: 2px solid #4A8CFF; }
+        .btn-primary {
+            background: #003399; color: #fff; padding: 6px 18px;
+            border-radius: 30px; font-weight: 700; text-decoration: none;
+            transition: 0.3s; display: inline-block; font-size: 13px;
+        }
+        .btn-primary:hover { background: #002280; transform: scale(1.02); }
+
+        section { padding: 40px 0; }
+        .section-header { text-align: center; margin-bottom: 40px; }
+        .section-header h1 { font-size: 36px; font-weight: 800; margin-bottom: 12px; color: #fff; }
+        .section-header h1 .highlight { color: #4A8CFF; }
+        .section-header p { color: #8A94C8; max-width: 800px; margin: 0 auto; font-size: 16px; }
+
+        /* Сетка карточек */
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .token-card {
+            background: rgba(26, 30, 65, 0.6); backdrop-filter: blur(12px);
+            border: 1px solid #1E2350; border-radius: 20px;
+            padding: 24px; transition: 0.3s;
+            display: flex; flex-direction: column;
+        }
+        .token-card:hover {
+            border-color: rgba(74,140,255,0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .token-card.hub {
+            border-color: rgba(74,140,255,0.5);
+            background: linear-gradient(180deg, rgba(26, 30, 65, 0.8) 0%, rgba(74,140,255,0.05) 100%);
+        }
+        .card-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 16px; border-bottom: 1px solid #1E2350; padding-bottom: 12px;
+        }
+        .card-title { font-size: 22px; font-weight: 700; color: #fff; }
+        .card-title span { color: #4A8CFF; }
+        .card-badge {
+            font-size: 11px; text-transform: uppercase; font-weight: 600;
+            background: rgba(74,140,255,0.1); color: #4A8CFF;
+            padding: 4px 10px; border-radius: 12px;
+        }
+        .card-role { font-size: 14px; color: #8A94C8; margin-bottom: 16px; }
+        .card-role strong { color: #E0E6FF; }
+        
+        .pools-list { margin-top: auto; }
+        .pools-title { font-size: 12px; text-transform: uppercase; color: #5A649A; margin-bottom: 8px; font-weight: 600; }
+        .pool-tag {
+            display: inline-block; font-size: 13px; font-family: 'Courier New', monospace;
+            background: rgba(255, 215, 0, 0.1); color: #FFD700;
+            padding: 6px 12px; border-radius: 8px; margin: 0 6px 6px 0;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            text-decoration: none; transition: 0.2s;
+        }
+        .pool-tag:hover { background: rgba(255, 215, 0, 0.2); color: #fff; }
+        
+        .card-footer { margin-top: 20px; padding-top: 16px; border-top: 1px solid #1E2350; font-size: 12px; color: #5A649A; }
+        .card-footer .contract { font-family: 'Courier New', monospace; color: #E0E6FF; word-break: break-all; }
+
+        footer {
+            background: #060920; padding: 30px 0 20px; text-align: center;
+            border-top: 1px solid #1E2350; margin-top: 40px;
+        }
+        footer p { color: #3A406A; font-size: 13px; margin-bottom: 8px; }
+        footer a { color: #5A649A; text-decoration: none; margin: 0 10px; }
+        footer a:hover { color: #4A8CFF; }
+
+        @media (max-width: 768px) {
+            .header-inner { flex-direction: column; align-items: stretch; }
+            nav { justify-content: center; }
+            .section-header h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-inner">
+        <div class="logo">
+            <img src="euro20_logo.png" alt="Ecosystem Hub" />
+            <span class="logo-text">123 Ecosystem</span>
+        </div>
+        <nav>
+            <a href="https://123tokens.github.io/euro20/">€20 Hub</a>
+            <a href="https://123tokens.github.io/one/">$ONE Hub</a>
+            <a href="https://123tokens.github.io/ghina/">$777 Hub</a>
+            <a href="ecosystem.html" class="active">Ecosystem Map</a>
+        </nav>
+        <a href="buy.html" class="btn-primary">Buy €20</a>
+    </div>
+</header>
+
+<section>
+    <div class="container">
+        <div class="section-header">
+            <h1>One•Two•Three <span class="highlight">Ecosystem Map</span> & Routing</h1>
+            <p>
+                The ecosystem consists of 7 interconnected tokens on Solana, linked into a single liquidity network through our central hubs: <strong>$ONE</strong> and <strong>$TAXI</strong>. 
+                All tokens utilize the <strong>Token-2022</strong> standard (where applicable) for advanced compliance and routing via <strong>Meteora DAMM V2</strong>.
+            </p>
+        </div>
+
+        <div class="hub-grid">
+            <!-- $ONE Hub -->
+            <div class="token-card hub">
+                <div class="card-header">
+                    <div class="card-title">$<span>ONE</span></div>
+                    <div class="card-badge">Hub</div>
+                </div>
+                <div class="card-role"><strong>Role:</strong> Primary Liquidity Hub</div>
+                <div class="pools-list">
+                    <div class="pools-title">Main Pools (Meteora V2):</div>
+                    <a href="https://www.geckoterminal.com/solana/pools/D6tgbM8TwtneypFPbTLFNYJS8Uu3WAFz4L9QRYj5HPiN" target="_blank" class="pool-tag">$ONE-USDT</a>
+                    <span class="pool-tag">$777-$ONE</span>
+                    <span class="pool-tag">€20-$ONE</span>
+                </div>
+                <div class="card-footer">
+                    <span class="contract">CGn6yYGTUkctq9PqDdK6ALgfxTS1vTBr9NWBPuoNYmad</span>
+                </div>
+            </div>
+
+            <!-- €20 Hub -->
+            <div class="token-card hub" style="border-color: #4A8CFF;">
+                <div class="card-header">
+                    <div class="card-title">€<span>20</span></div>
+                    <div class="card-badge" style="background: #4A8CFF; color: #fff;">Token-2022</div>
+                </div>
+                <div class="card-role"><strong>Role:</strong> European Routing Hub</div>
+                <div class="pools-list">
+                    <div class="pools-title">Main Pools:</div>
+                    <a href="https://app.uniswap.org/explore/tokens/solana/EVr3k6rruveLtQiLadvNiKhK8e4WecnLHZxhcJwRDuTg" target="_blank" class="pool-tag">€20-USDC</a>
+                    <span class="pool-tag">€20-$ONE</span>
+                </div>
+                <div class="card-footer">
+                    <span class="contract">EVr3k6rruveLtQiLadvNiKhK8e4WecnLHZxhcJwRDuTg</span>
+                </div>
+            </div>
+
+            <!-- $777 -->
+            <div class="token-card">
+                <div class="card-header">
+                    <div class="card-title">$<span>777</span></div>
+                    <div class="card-badge">Utility</div>
+                </div>
+                <div class="card-role"><strong>Role:</strong> Jackpot & Wealth Hub</div>
+                <div class="pools-list">
+                    <div class="pools-title">Main Pools (Meteora V2):</div>
+                    <a href="https://www.geckoterminal.com/solana/pools/VitKKijuJGM2REPHUPeCETCLavdtFGj6VZ3vDgjiRPz" target="_blank" class="pool-tag">$777-USDC</a>
+                    <span class="pool-tag">$777-$ONE</span>
+                </div>
+                <div class="card-footer">
+                    <span class="contract">AngvUKJbhMf46uvM5sCeeLLBqz13B6gqzuLBy3tBzXAd</span>
+                </div>
+            </div>
+
+            <!-- ¥365 -->
+            <div class="token-card">
+                <div class="card-header">
+                    <div class="card-title">¥<span>365</span></div>
+                    <div class="card-badge">Utility</div>
+                </div>
+                <div class="card-role"><strong>Role:</strong> Yearly Cycle Token</div>
+                <div class="pools-list">
+                    <div class="pools-title">Main Pools (Meteora V2):</div>
+                    <a href="https://www.geckoterminal.com/solana/pools/4LkZSprk6dfw58C34oTUSwXCSQGs8bsMYGqAgQVVVcgo" target="_blank" class="pool-tag">¥365-USDC</a>
+                </div>
+                <div class="card-footer">
+                    <span class="contract">BkpD4t5sbVyMqFoQ3qNY2kJAKW4pcSTfCpZN6VnsBNnD</span>
+                </div>
+            </div>
+
+            <!-- $TAXI -->
+            <div class="token-card hub">
+                <div class="card-header">
+                    <div class="card-title">$<span>TAXI</span></div>
+                    <div class="card-badge">Hub</div>
+                </div>
+                <div class="card-role"><strong>Role:</strong> Secondary Routing Hub</div>
+                <div class="pools-list">
+                    <div class="pools-title">Main Pools:</div>
+                    <span class="pool-tag">SOL-$TAXI</span>
+                    <span class="pool-tag">$ONE-$TAXI</span>
+                </div>
+                <div class="card-footer">
+                    <span class="contract">Contract Address TBA</span>
+                </div>
+            </div>
+            
+            <!-- ¥FIVE -->
+            <div class="token-card">
+                <div class="card-header">
+                    <div class="card-title">¥<span>FIVE</span></div>
+                    <div class="card-badge">Utility</div>
+                </div>
+                <div class="card-role"><strong>Role:</strong> Asian Market / Lucky Number</div>
+                <div class="pools-list">
+                    <div class="pools-title">Main Pools (Meteora V2):</div>
+                    <a href="https://www.geckoterminal.com/solana/pools/6tHA3RcVgtuN2AgugoMtMj8R63KXhgkTNsZefifPPZMj" target="_blank" class="pool-tag">¥FIVE-USDC</a>
+                </div>
+                <div class="card-footer">
+                    <span class="contract">45fwvzyjUSnvd7NeEgSK5oL1wycMzuS5CTtWRFhCHU6u</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>© 2026 One•Two•Three Ecosystem. Built on Solana.</p>
+        <div>
+            <a href="index.html">€20</a>
+            <a href="https://123tokens.github.io/one/">$ONE</a>
+            <a href="https://123tokens.github.io/ghina/">$777</a>
+            <a href="ecosystem.html">Ecosystem Map</a>
+            <a href="llms.txt" target="_blank">llms.txt (AI Agent Data)</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
